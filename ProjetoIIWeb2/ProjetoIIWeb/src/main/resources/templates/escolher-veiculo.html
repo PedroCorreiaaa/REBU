@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolher Veículo - REBU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header .title {
+            margin: 0;
+        }
+        .menu-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .menu-buttons button {
+            background-color: transparent;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .menu-buttons button:hover {
+            background-color: lightgray;
+        }
+        .menu-user {
+            width: 30px;
+            height: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: lightgray;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
+    <script>
+        function validarSelecao() {
+            var comboBox = document.getElementById('veiculoCondutor');
+            if (comboBox.value === "") {
+                alert("Por favor, selecione um veículo.");
+                return false;
+            }
+            // Definir o valor selecionado no campo oculto
+            document.getElementById('veiculoSelecionado').value = comboBox.value;
+            // Submeter o formulário
+            document.getElementById('formEscolherVeiculo').submit();
+        }
+
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">Escolher Veículo</h1>
+    </div>
+    <div class="menu-buttons">
+        <button onclick="location.href='/historico';">Histórico</button>
+        <button onclick="location.href='/ajuda';">Ajuda</button>
+        <button onclick="location.href='/registar-veiculo';">Registar Veículo</button>
+    </div>
+    <form id="formEscolherVeiculo" action="/escolher-veiculo" method="post">
+        <div class="form-group">
+            <label for="veiculoCondutor">Veículo:</label>
+            <select id="veiculoCondutor" name="veiculoCondutor" required>
+                <option value="">Selecione um veículo</option>
+                <!-- Opções preenchidas dinamicamente -->
+                <option th:each="veiculo : ${veiculosCondutor}" th:value="${veiculo}" th:text="${veiculo}"></option>
+            </select>
+        </div>
+        <!-- Campo oculto para armazenar o veículo selecionado -->
+        <input type="hidden" id="veiculoSelecionado" name="veiculoSelecionado" value="">
+        <div class="form-group">
+            <button type="button" onclick="validarSelecao()">Avançar</button>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="location.href='/menu-condutor';">Voltar</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

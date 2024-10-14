@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registo de Passageiro</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header .title {
+            margin: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select,
+        button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">Registo de Passageiro</h1>
+        <button class="home-button" onclick="window.location.href='/home';" type="button">REBU</button>
+    </div>
+    <button class="back-button" onclick="window.location.href='/home';" type="button">Voltar</button>
+
+    <!-- Mensagens de erro e sucesso -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <form th:action="@{/viajar}" method="post">
+        <div class="form-group">
+            <label for="nomeField">Nome:</label>
+            <input type="text" id="nomeField" name="nome" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="dataNascPicker">Data de Nascimento:</label>
+            <input type="date" id="dataNascPicker" name="dataNascimento" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gênero:</label>
+            <select id="gender" name="genero" class="form-control" required>
+                <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nationality">Nacionalidade:</label>
+            <select id="nationality" name="nacionalidade" class="form-control" required>
+                <option th:each="nacionalidade : ${nacionalidades}" th:value="${nacionalidade}" th:text="${nacionalidade}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nCartaoCidadaoField">Nº Cartão de Cidadão:</label>
+            <input type="text" id="nCartaoCidadaoField" name="nCartaoCidadao" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="passwordField">Palavra-passe:</label>
+            <input type="password" id="passwordField" name="password" class="form-control" required>
+        </div>
+        <button type="submit">Registar</button>
+    </form>
+</div>
+</body>
+</html>

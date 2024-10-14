@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebu</title>
+    <link rel="stylesheet" th:href="@{/helloworld.css}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 id="rebuTitle" class="title">REBU</h1>
+        <a th:href="@{/viajar}" class="nav-button">Viajar</a>
+        <a th:href="@{/conduzir}" class="nav-button">Conduzir</a>
+        <a th:href="@{/iniciar-sessao}" class="nav-button">Iniciar Sessão</a>
+    </div>
+    <div class="slogans">
+        <h2 id="slogan1">Rebu, a sua viagem</h2>
+        <h2 id="slogan2">sempre à mão</h2>
+    </div>
+    <div class="image-container">
+        <img id="cartoon" th:src="@{/imagens/cartoon.jpg}" alt="Cartoon Image">
+    </div>
+</div>
+</body>
+</html>

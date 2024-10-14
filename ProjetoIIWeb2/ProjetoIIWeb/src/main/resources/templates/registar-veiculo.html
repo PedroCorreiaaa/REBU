@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registo de Veículo</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: white;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: transparent; /* sem cor de fundo */
+            color: black; /* cor do texto */
+            border: 1px solid black; /* borda preta */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn:hover {
+            background-color: #f2f2f2; /* cor de fundo ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <span class="title">Registo de Veículo</span>
+        <button id="homeButton" class="btn" onclick="window.location.href='/menu-condutor';">REBU</button>
+    </div>
+    <button id="voltarButton" class="btn" onclick="window.location.href='/menu-condutor';">Voltar</button>
+
+    <!-- Mensagens de erro e sucesso -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <form id="registrarVeiculoForm" action="/registar-veiculo" method="post">
+        <div class="form-group">
+            <label for="marcaField">Marca:</label>
+            <input type="text" id="marcaField" name="marca" required>
+        </div>
+        <div class="form-group">
+            <label for="modeloField">Modelo:</label>
+            <input type="text" id="modeloField" name="modelo" required>
+        </div>
+        <div class="form-group">
+            <label for="anoFabricoField">Ano de Fabrico:</label>
+            <input type="text" id="anoFabricoField" name="anoFabrico" required>
+        </div>
+        <div class="form-group">
+            <label for="matriculaField">Matrícula:</label>
+            <input type="text" id="matriculaField" name="matricula" required>
+        </div>
+        <div class="form-group">
+            <label for="tipoVeiculo">Tipo de Veículo:</label>
+            <select id="tipoVeiculo" name="tipoVeiculo" class="form-control" required>
+                <option th:each="tipoVeiculo : ${tiposVeiculo}" th:value="${tipoVeiculo}" th:text="${tipoVeiculo}"></option>
+            </select>
+        </div>
+        <button id="registarButton" class="btn" type="submit">Registar</button>
+    </form>
+</div>
+</body>
+</html>
